@@ -1,0 +1,95 @@
+  <div id="top-bar"></div>
+  <div id="container-quote">
+    <h1 id="quote">{{quote}}</h1>
+    <h2 id="author">
+      <a href="https://www.google.com/search?q=Joan+Benoit+Samuelson&oq=Joan+Benoit+Samuelson">
+        <span><b>—</b></span>&nbsp;&nbsp;{{author}}
+      </a>
+    </h2>
+  </div>
+  <div id="media-block">
+    <ul>
+      <!-- 
+      <li>Facebook | </li>
+      <li>Twitter | </li> 
+      -->
+      <li id="show-text-input"><button>Get this as a text message!</button></li>
+    </ul>
+  </div>
+  <div id="signup-text">
+    <p id="form-text">Coolio! Just put your number in.</p>
+    <label id="label-phone" for="email"></label>
+    <input id="input-phone" type="text" name="signup" placeholder="0123456789">
+    <button id="send" class="button-primary">Send</button>
+    <p id="form-fail">Phone number must be ten digits long and consist of only numbers.</p>
+  </div>
+  <p id="form-success">Success! We got it.</p>
+  
+  <footer>Run Inspired <span><b>&#9786;</b></span></footer>
+
+  <script type="text/javascript">
+
+    var signupText  = document.getElementById('signup-text')
+    var textInput   = document.getElementById('show-text-input')
+    var phoneInput  = document.getElementById('input-phone')
+    var send        = document.getElementById('send')
+    var formSuccess = document.getElementById('form-success')
+    var formFail    = document.getElementById('form-fail')
+    var validNumber = false
+
+    // show phone input form
+    function showTextInput() {
+      signupText.style.display = "block"
+      phoneInput.focus()
+    }
+
+    // handle sending number
+    function sendNumber() {
+      if (!validNumber) return // fail
+      else { // success
+        formSuccess.style.display = "block"
+        signupText.style.display = "none"
+        textInput.style.display = "none"
+
+        setTimeout(function() { // hide form
+          formSuccess.style.display = "none"
+        }, 5000)
+      }
+    }
+
+    // TODO: add length check. allow/check hyphens
+    // Validate phone number
+    function validateInput(e) {
+      phoneNumber = phoneInput.value
+      var invalidCharacters = phoneNumber.match(/\D/g,'') // matches non-numbers
+      if(invalidCharacters || phoneNumber.length !== 10) { // failure
+        validNumber = false
+        formFail.style.color = "#e9322d"
+        phoneInput.style.borderColor = "#e9322d"
+      } else { // success
+        validNumber = true
+        formFail.style.color = "#888"
+        phoneInput.style.borderColor = "#00CBFF"
+        if (e.keyCode === 13) { // enter key
+          sendNumber()
+        }
+      }
+    }
+
+    function saveNumber(url, callback) {
+      var xmlHttp = new XMLHttpRequest()
+      xmlHttp.onreadystatechange = function() { 
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+          callback(xmlHttp.responseText)
+        }
+      }
+      xmlHttp.open("GET", url, true); // true for asynchronous 
+      xmlHttp.send(null)
+    }
+    
+    // Event Listeners
+    textInput.addEventListener('click', showTextInput, false)
+    send.addEventListener('click', sendNumber, false)
+    phoneInput.addEventListener('keyup', validateInput, false)
+
+  </script>

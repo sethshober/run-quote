@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="utf-8">
+  <title>{{title}}</title>
+  <meta name="description" content="Daily running inspiration.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=no">
+  <script type="text/javascript">{{nreum}}</script>
+  <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Gentium+Basic:400' rel='stylesheet' type='text/css'>
+  
+  <style type="text/css" media="screen">
+    
+    /* Inlining styles because the content is above the fold. */
+
+    body, h1, h2, footer {
+      font-family: 'Lato', "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+      font-size: 1rem;
+      text-align: center;
+      color: black;
+      margin: 0;
+      font-weight: 400;
+    }
+
+    ul { padding: 0; }
+
+    span { color: #00CBFF; }
+
+    footer {
+      position: fixed;
+      bottom: 0;
+      color: #888;
+      padding: 1.25rem 0;
+      width: 100%;
+      background: white;
+      font-size: 1.1rem;
+    }
+
+    #top-bar {
+      position: fixed;
+      top: 0;
+      height: 5px;
+      background: #00CBFF;
+      width: 100%;
+      margin: 0;
+    }
+
+    #container-quote,
+    #quote {
+      max-width: 1400px;
+    }
+    
+    #container-quote {
+      margin: 2rem auto;
+      padding: 1rem;
+    }
+
+    #quote {
+      font-size: 2.75rem;
+      font-weight: 700;
+    }
+
+    #author {
+      font-family: 'Gentium Basic', Georgia, Times, "Times New Roman", serif;
+      color: #888;
+      font-size: 1.5rem;
+      font-weight: 300;
+      margin-top: 3rem;
+    }
+
+    #media-block {
+      margin-top: 1rem;
+      padding: 1rem;
+    }
+
+    #media-block ul li {
+      display: block;
+    }
+
+    #signup-text {
+      display: none;
+      margin-bottom: 5rem;
+    }
+
+    #show-text-input {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    #form-text,
+    #form-success,
+    #form-fail {
+      font-weight: 700;
+    }
+
+    #form-success {
+      color: rgb(28, 184, 65);
+      display: none;
+      font-size: 2rem;
+    }
+
+    #form-fail {
+      color: #888;
+    }
+
+    #input-phone {
+      margin: 1rem auto;
+      width: 95%;
+    }
+
+    #label-phone {
+      visibility: hidden;
+    }
+
+    #send {
+      font-size: 120%;
+      display: block;
+      margin: 0 auto;
+      width: 95%;
+    }
+
+    input {
+      padding: 0.4em 0.5em;
+      display: inline-block;
+      border: 1px solid #ccc;
+      box-shadow: inset 0 1px 3px #ddd;
+      border-radius: 4px;
+      vertical-align: middle;
+      box-sizing: border-box;
+      line-height: 1.5rem;
+      font-size: 1.25rem;
+    }
+
+    input:focus {
+      outline: 0;
+      border-color: #00CBFF;
+    }
+
+    input:focus:invalid {
+      color: #b94a48;
+      border-color: #e9322d;
+    }
+
+    button {
+      /* Structure */
+      display: inline-block;
+      zoom: 1;
+      line-height: normal;
+      white-space: nowrap;
+      vertical-align: middle;
+      text-align: center;
+      cursor: pointer;
+      -webkit-user-drag: none;
+      user-select: none;
+      box-sizing: border-box;
+
+      font-family: inherit;
+      font-size: 100%;
+      padding: 0.5em 1em;
+      color: #444; /* rgba not supported (IE 8) */
+      color: rgba(0, 0, 0, 0.80); /* rgba supported */
+      border: 1px solid #999;  /*IE 6/7/8*/
+      border: none rgba(0, 0, 0, 0);  /*IE9 + everything else*/
+      background-color: #E6E6E6;
+      text-decoration: none;
+      border-radius: 2px;
+    }
+
+    button:hover,
+    button:focus {
+      filter: alpha(opacity=90);
+      background-image: linear-gradient(transparent, rgba(0,0,0, 0.05) 40%, rgba(0,0,0, 0.10));
+    }
+
+    button:focus {
+      outline: 0;
+    }
+
+    button:active {
+      box-shadow: 0 0 0 1px rgba(0,0,0, 0.15) inset, 0 0 6px rgba(0,0,0, 0.20) inset;
+      border-color: #000\9;
+    }
+
+    .button-primary,
+    .button-selected,
+    a.button-primary,
+    a.button-selected {
+      background-color: #00CBFF; /*rgb(0, 120, 231);*/
+      color: #fff;
+    }
+
+    a, a:visited {
+      text-decoration: none;
+      color: inherit;
+      -webkit-transition: color 500ms ease;
+         -moz-transition: color 500ms ease;
+           -o-transition: color 500ms ease;
+              transition: color 500ms ease;
+    }
+
+    a:hover {
+      color: #00CBFF;
+    }
+
+    @media (hover:none), (hover:on-demand) {
+      /* suppress hover effect on devices that don't support hover fully */
+      a:hover{
+        color: #00CBFF;
+      }
+    }
+
+    /* Small Devices, Tablets */
+    @media only screen and (min-width: 768px) { 
+      #media-block {
+        margin-top: 3rem;
+      }
+      #media-block ul li {
+        display: inline-block;
+      }
+      #send {
+        font-size: 120%;
+        display: inline-block;
+        margin: initial;
+        width: initial;
+      }
+      #input-phone {
+        width: initial;
+      }
+      #quote {
+        font-size: 4rem;
+      }
+      #author {
+        font-size: 2.5rem;
+      }
+    }
+
+    /* Large Devices, Wide Screens */
+    @media only screen and (min-width: 1200px) { 
+      #container-quote,
+      #quote {
+        margin: 0 auto;
+      }
+      #container-quote {
+        margin-top: 5rem;
+      }
+    }
+
+  </style>
+</head>
+  <body>
+    {{{body}}}
+  </body>
+</html>
