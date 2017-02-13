@@ -1,9 +1,9 @@
 
-var Phone = require('../models/phone_signup')
+var Phone = require('../models/phone')
   , router = require('express').Router()
 
 
-// get all the emails
+// get all the numbers
 router.get('/phone-numbers', function(req, res, next) {
   Phone.find()
     .exec(function(err, numbers) {
@@ -12,16 +12,30 @@ router.get('/phone-numbers', function(req, res, next) {
     })
 })
 
-// create email
-router.post('/phone-signup', function(req, res, next) {
-  console.log(req.body.phone)
-  var number = new Phone({phone: req.body.phone})
-  console.log(phone)
-  phone.save(function(err) {
-    if (err) console.log(err); return next(err)
-    res.sendStatus(201)
-  })
-})
+// create number
+// router.get('/phone-signup', function(req, res, next) {
+//   var phoneNumber = req.query.phone
+//   validateInput(phoneNumber)
+//   function validateInput(number) {
+//     var invalidCharacters = number.match(/\D/g) // matches non-numbers
+//     if (invalidCharacters || number.length !== 10) { // failure
+//       return res.sendStatus(400)
+//     } else { // success, save to mongo
+//       var phone = new Phone({phone: number})
+//       phone.save(function(err) {
+//         if (err) {
+//           if (err.name === 'MongoError' && err.code === 11000) { // Duplicate username
+//             return res.status(500).send({ success: false, message: 'User already exists!' });
+//           } else {
+//             return next(err) // forward error to handler
+//           }
+//         } else { // successfully created
+//           return res.sendStatus(201)
+//         }
+//       })
+//     }
+//   }
+// })
 
 
 module.exports = router

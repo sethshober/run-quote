@@ -2,7 +2,7 @@
   <div id="container-quote">
     <h1 id="quote">{{quote}}</h1>
     <h2 id="author">
-      <a href="https://www.google.com/search?q=Joan+Benoit+Samuelson&oq=Joan+Benoit+Samuelson">
+      <a href={{search}}>
         <span><b>—</b></span>&nbsp;&nbsp;{{author}}
       </a>
     </h2>
@@ -11,9 +11,10 @@
     <ul>
       <!-- 
       <li>Facebook | </li>
-      <li>Twitter | </li> 
-      -->
+      <li>Twitter | </li>
+
       <li id="show-text-input"><button>Get this as a text message!</button></li>
+      -->
     </ul>
   </div>
   <div id="signup-text">
@@ -44,16 +45,18 @@
     }
 
     // handle sending number
-    function sendNumber() {
+    function sendNumber(number) {
       if (!validNumber) return // fail
       else { // success
-        formSuccess.style.display = "block"
-        signupText.style.display = "none"
-        textInput.style.display = "none"
-
-        setTimeout(function() { // hide form
-          formSuccess.style.display = "none"
-        }, 5000)
+        saveNumber('/phone-signup', number, function(response) {
+          console.log(response)
+          formSuccess.style.display = "block"
+          signupText.style.display = "none"
+          textInput.style.display = "none"
+          setTimeout(function() { // hide form
+            formSuccess.style.display = "none"
+          }, 5000)
+        })
       }
     }
 
@@ -61,7 +64,7 @@
     // Validate phone number
     function validateInput(e) {
       phoneNumber = phoneInput.value
-      var invalidCharacters = phoneNumber.match(/\D/g,'') // matches non-numbers
+      var invalidCharacters = phoneNumber.match(/\D/g) // matches non-numbers
       if(invalidCharacters || phoneNumber.length !== 10) { // failure
         validNumber = false
         formFail.style.color = "#e9322d"
@@ -71,25 +74,27 @@
         formFail.style.color = "#888"
         phoneInput.style.borderColor = "#00CBFF"
         if (e.keyCode === 13) { // enter key
-          sendNumber()
+          sendNumber(phoneNumber)
         }
       }
     }
 
-    function saveNumber(url, callback) {
+    function saveNumber(url, number, callback) {
       var xmlHttp = new XMLHttpRequest()
       xmlHttp.onreadystatechange = function() { 
-        if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+        if (xmlHttp.readyState == 4 && xmlHttp.status < 300) {
           callback(xmlHttp.responseText)
         }
       }
-      xmlHttp.open("GET", url, true); // true for asynchronous 
+      xmlHttp.open("GET", url + '?phone=' + number, true); // true for asynchronous 
       xmlHttp.send(null)
     }
     
     // Event Listeners
     textInput.addEventListener('click', showTextInput, false)
-    send.addEventListener('click', sendNumber, false)
+    send.addEventListener('click', function() {
+      sendNumber(phoneInput.value)
+    }, false)
     phoneInput.addEventListener('keyup', validateInput, false)
 
   </script>
