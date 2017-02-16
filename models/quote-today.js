@@ -10,17 +10,9 @@ var schema = new db.Schema({
   author: {
     type: String,
     default: 'anonymous'
-  },
-  date: {
-    type: Date,
-    default: Date.now
-  },
-  used: {
-    type: Boolean,
-    default: false
   }
 })
 
-var Quote = db.model('Quote', schema, 'quotes')
+var QuoteToday = db.model('QuoteToday', schema, 'today')
 
-module.exports = Quote
+module.exports = QuoteToday

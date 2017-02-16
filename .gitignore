@@ -36,7 +36,7 @@ node_modules
 DS_Store
 
 # dotenv
-#.env
+.env
 
 # New Relic
 newrelic_agent.log

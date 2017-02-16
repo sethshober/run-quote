@@ -1,6 +1,5 @@
-
 var Phone = require('../models/phone')
-  , router = require('express').Router()
+var router = require('express').Router()
 
 
 // get all the numbers

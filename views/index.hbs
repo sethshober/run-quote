@@ -2,7 +2,7 @@
   <div id="container-quote">
     <h1 id="quote">{{quote}}</h1>
     <h2 id="author">
-      <a href={{search}}>
+      <a href={{search}} target="_blank">
         <span><b>—</b></span>&nbsp;&nbsp;{{author}}
       </a>
     </h2>
@@ -91,10 +91,10 @@
     }
     
     // Event Listeners
-    textInput.addEventListener('click', showTextInput, false)
-    send.addEventListener('click', function() {
-      sendNumber(phoneInput.value)
-    }, false)
-    phoneInput.addEventListener('keyup', validateInput, false)
+    // textInput.addEventListener('click', showTextInput, false)
+    // send.addEventListener('click', function() {
+    //  sendNumber(phoneInput.value)
+    //}, false)
+    //phoneInput.addEventListener('keyup', validateInput, false)
 
   </script>
