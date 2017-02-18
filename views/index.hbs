@@ -25,18 +25,24 @@
     <p id="form-fail">Phone number must be ten digits long and consist of only numbers.</p>
   </div>
   <p id="form-success">Success! We got it.</p>
+
+  <button id="used-quotes">See More Quotes</button>
+
+  <div id="quote-listing"></div>
   
   <footer>Run Inspired <span><b>&#9786;</b></span></footer>
 
   <script type="text/javascript">
 
-    var signupText  = document.getElementById('signup-text')
-    var textInput   = document.getElementById('show-text-input')
-    var phoneInput  = document.getElementById('input-phone')
-    var send        = document.getElementById('send')
-    var formSuccess = document.getElementById('form-success')
-    var formFail    = document.getElementById('form-fail')
-    var validNumber = false
+    var signupText   = document.getElementById('signup-text')
+    var textInput    = document.getElementById('show-text-input')
+    var phoneInput   = document.getElementById('input-phone')
+    var send         = document.getElementById('send')
+    var formSuccess  = document.getElementById('form-success')
+    var formFail     = document.getElementById('form-fail')
+    var usedQuotes   = document.getElementById('used-quotes')
+    var quoteListing = document.getElementById('quote-listing')
+    var validNumber  = false
 
     // show phone input form
     function showTextInput() {
@@ -89,6 +95,45 @@
       xmlHttp.open("GET", url + '?phone=' + number, true); // true for asynchronous 
       xmlHttp.send(null)
     }
+
+
+    function loadMoreQuotes(url, callback) {
+      var xmlHttp = new XMLHttpRequest()
+      xmlHttp.onreadystatechange = function() { 
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+          var data = JSON.parse(xmlHttp.response)
+          callback(data)
+        }
+      }
+      xmlHttp.open("GET", url, true); // true for asynchronous 
+      xmlHttp.send(null)
+    }
+
+    function renderQuotes(data, callback) {
+      var innerHtml = ''
+      for (var i = 0; i < data.length; i++) {
+        console.log(data[i])
+        var author = data[i].author.split(' ')
+        var term = ''
+        for (var j = 0; j < author.length; j++) {
+          term = term + author[j] + '+'
+        }
+        term = term.slice(0, -1)
+        var html = ''
+        html += '<div class="quote-listing-container">'
+        +    '<p class="quote-text">'
+        +      data[i].text
+        +    '</p>'
+        +    '<p class="quote-author">'
+        +      '<a href="https://www.google.com/search?q=' + term +  '" target="_blank">'
+        +      '<span><b>—</b></span>&nbsp;&nbsp;' + data[i].author + '</a>'
+        +    '</p>'
+        +  '</div>'
+        innerHtml = innerHtml + html
+      }
+      callback(innerHtml)
+    }
+
     
     // Event Listeners
     // textInput.addEventListener('click', showTextInput, false)
@@ -96,5 +141,14 @@
     //  sendNumber(phoneInput.value)
     //}, false)
     //phoneInput.addEventListener('keyup', validateInput, false)
+    usedQuotes.addEventListener('click', function() {
+      loadMoreQuotes('./usedQuotes.json', function(response) {
+        renderQuotes(response, function(html) {
+          console.log(html)
+          quoteListing.insertAdjacentHTML( 'beforeend', html );
+          quoteListing.style.display = "block"
+        })
+      })
+    }, false)
 
   </script>
