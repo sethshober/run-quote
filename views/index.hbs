@@ -2,7 +2,7 @@
   <div id="container-quote">
     <h1 id="quote">{{quote}}</h1>
     <h2 id="author">
-      <a href={{search}} target="_blank">
+      <a id="author-link" href={{search}} target="_blank">
         <span><b>—</b></span>&nbsp;&nbsp;{{author}}
       </a>
     </h2>
@@ -26,129 +26,11 @@
   </div>
   <p id="form-success">Success! We got it.</p>
 
-  <button id="used-quotes">See More Quotes</button>
-
+  <div id="buttons">
+    <button id="random">Get Random</button>
+    <button id="used-quotes">Get More</button>
+  </div>
+  
   <div id="quote-listing"></div>
   
   <footer>Run Inspired <span><b>&#9786;</b></span></footer>
-
-  <script type="text/javascript">
-
-    var signupText   = document.getElementById('signup-text')
-    var textInput    = document.getElementById('show-text-input')
-    var phoneInput   = document.getElementById('input-phone')
-    var send         = document.getElementById('send')
-    var formSuccess  = document.getElementById('form-success')
-    var formFail     = document.getElementById('form-fail')
-    var usedQuotes   = document.getElementById('used-quotes')
-    var quoteListing = document.getElementById('quote-listing')
-    var validNumber  = false
-
-    // show phone input form
-    function showTextInput() {
-      signupText.style.display = "block"
-      phoneInput.focus()
-    }
-
-    // handle sending number
-    function sendNumber(number) {
-      if (!validNumber) return // fail
-      else { // success
-        saveNumber('/phone-signup', number, function(response) {
-          console.log(response)
-          formSuccess.style.display = "block"
-          signupText.style.display = "none"
-          textInput.style.display = "none"
-          setTimeout(function() { // hide form
-            formSuccess.style.display = "none"
-          }, 5000)
-        })
-      }
-    }
-
-    // TODO: add length check. allow/check hyphens
-    // Validate phone number
-    function validateInput(e) {
-      phoneNumber = phoneInput.value
-      var invalidCharacters = phoneNumber.match(/\D/g) // matches non-numbers
-      if(invalidCharacters || phoneNumber.length !== 10) { // failure
-        validNumber = false
-        formFail.style.color = "#e9322d"
-        phoneInput.style.borderColor = "#e9322d"
-      } else { // success
-        validNumber = true
-        formFail.style.color = "#888"
-        phoneInput.style.borderColor = "#00CBFF"
-        if (e.keyCode === 13) { // enter key
-          sendNumber(phoneNumber)
-        }
-      }
-    }
-
-    function saveNumber(url, number, callback) {
-      var xmlHttp = new XMLHttpRequest()
-      xmlHttp.onreadystatechange = function() { 
-        if (xmlHttp.readyState == 4 && xmlHttp.status < 300) {
-          callback(xmlHttp.responseText)
-        }
-      }
-      xmlHttp.open("GET", url + '?phone=' + number, true); // true for asynchronous 
-      xmlHttp.send(null)
-    }
-
-
-    function loadMoreQuotes(url, callback) {
-      var xmlHttp = new XMLHttpRequest()
-      xmlHttp.onreadystatechange = function() { 
-        if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
-          var data = JSON.parse(xmlHttp.response)
-          callback(data)
-        }
-      }
-      xmlHttp.open("GET", url, true); // true for asynchronous 
-      xmlHttp.send(null)
-    }
-
-    function renderQuotes(data, callback) {
-      var innerHtml = ''
-      for (var i = 0; i < data.length; i++) {
-        console.log(data[i])
-        var author = data[i].author.split(' ')
-        var term = ''
-        for (var j = 0; j < author.length; j++) {
-          term = term + author[j] + '+'
-        }
-        term = term.slice(0, -1)
-        var html = ''
-        html += '<div class="quote-listing-container">'
-        +    '<p class="quote-text">'
-        +      data[i].text
-        +    '</p>'
-        +    '<p class="quote-author">'
-        +      '<a href="https://www.google.com/search?q=' + term +  '" target="_blank">'
-        +      '<span><b>—</b></span>&nbsp;&nbsp;' + data[i].author + '</a>'
-        +    '</p>'
-        +  '</div>'
-        innerHtml = innerHtml + html
-      }
-      callback(innerHtml)
-    }
-
-    
-    // Event Listeners
-    // textInput.addEventListener('click', showTextInput, false)
-    // send.addEventListener('click', function() {
-    //  sendNumber(phoneInput.value)
-    //}, false)
-    //phoneInput.addEventListener('keyup', validateInput, false)
-    usedQuotes.addEventListener('click', function() {
-      loadMoreQuotes('./usedQuotes.json', function(response) {
-        renderQuotes(response, function(html) {
-          console.log(html)
-          quoteListing.insertAdjacentHTML( 'beforeend', html );
-          quoteListing.style.display = "block"
-        })
-      })
-    }, false)
-
-  </script>

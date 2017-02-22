@@ -52,7 +52,7 @@
     
     #container-quote {
       margin: 2rem auto;
-      padding: 1rem;
+      padding: 0.75rem;
     }
 
     #quote {
@@ -120,8 +120,17 @@
       width: 95%;
     }
 
+    #buttons button {
+      display: inline-block;
+    }
+
+    #buttons {
+      text-align: center;
+      margin-bottom: 10rem
+    }
+
     #used-quotes {
-      margin-bottom: 5rem;
+      margin-left: 1rem;
     }
 
     #quote-listing {
@@ -129,6 +138,7 @@
       margin-bottom: 10rem;
       max-width: 750px;
       margin: 0 auto;
+      padding: 1rem;
     }
 
     .quote-listing-container {
@@ -277,5 +287,161 @@
 </head>
   <body>
     {{{body}}}
+
+    <script type="text/javascript">
+
+    var signupText   = document.getElementById('signup-text')
+    var textInput    = document.getElementById('show-text-input')
+    var phoneInput   = document.getElementById('input-phone')
+    var send         = document.getElementById('send')
+    var formSuccess  = document.getElementById('form-success')
+    var formFail     = document.getElementById('form-fail')
+    var usedQuotes   = document.getElementById('used-quotes')
+    var quoteListing = document.getElementById('quote-listing')
+    var random       = document.getElementById('random')
+    var quote        = document.getElementById('quote')
+    var author       = document.getElementById('author')
+    var authorLink   = document.getElementById('author-link')
+    var validNumber  = false
+
+    // show phone input form
+    function showTextInput() {
+      signupText.style.display = "block"
+      phoneInput.focus()
+    }
+
+    // handle sending number
+    // function sendNumber(number) {
+    //   if (!validNumber) return // fail
+    //   else { // success
+    //     saveNumber('/phone-signup', number, function(response) {
+    //       console.log(response)
+    //       formSuccess.style.display = "block"
+    //       signupText.style.display = "none"
+    //       textInput.style.display = "none"
+    //       setTimeout(function() { // hide form
+    //         formSuccess.style.display = "none"
+    //       }, 5000)
+    //     })
+    //   }
+    // }
+
+    // TODO: add length check. allow/check hyphens
+    // Validate phone number
+    // function validateInput(e) {
+    //   phoneNumber = phoneInput.value
+    //   var invalidCharacters = phoneNumber.match(/\D/g) // matches non-numbers
+    //   if(invalidCharacters || phoneNumber.length !== 10) { // failure
+    //     validNumber = false
+    //     formFail.style.color = "#e9322d"
+    //     phoneInput.style.borderColor = "#e9322d"
+    //   } else { // success
+    //     validNumber = true
+    //     formFail.style.color = "#888"
+    //     phoneInput.style.borderColor = "#00CBFF"
+    //     if (e.keyCode === 13) { // enter key
+    //       sendNumber(phoneNumber)
+    //     }
+    //   }
+    // }
+
+    // function saveNumber(url, number, callback) {
+    //   var xmlHttp = new XMLHttpRequest()
+    //   xmlHttp.onreadystatechange = function() { 
+    //     if (xmlHttp.readyState == 4 && xmlHttp.status < 300) {
+    //       callback(xmlHttp.responseText)
+    //     }
+    //   }
+    //   xmlHttp.open("GET", url + '?phone=' + number, true); // true for asynchronous 
+    //   xmlHttp.send(null)
+    // }
+
+
+    function loadMoreQuotes(url, callback) {
+      var xmlHttp = new XMLHttpRequest()
+      xmlHttp.onreadystatechange = function() { 
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+          var data = JSON.parse(xmlHttp.response)
+          callback(data)
+        }
+      }
+      xmlHttp.open("GET", url, true); // true for asynchronous 
+      xmlHttp.send(null)
+    }
+
+    function loadRandomQuote(url, callback) {
+      var xmlHttp = new XMLHttpRequest()
+      xmlHttp.onreadystatechange = function() { 
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+          var data = JSON.parse(xmlHttp.response)
+          callback(data)
+        }
+      }
+      xmlHttp.open("GET", url, true); // true for asynchronous 
+      xmlHttp.send(null)
+    }
+
+    function renderQuotes(data, callback) {
+      var innerHtml = ''
+      for (var i = data.length - 1; i >= 0; i--) {
+        var author = data[i].author.split(' ')
+        var term = getSearchTerm(author)
+        var html = ''
+        html += '<div class="quote-listing-container">'
+        +    '<p class="quote-text">'
+        +      data[i].text
+        +    '</p>'
+        +    '<p class="quote-author">'
+        +      '<a href="https://www.google.com/search?q=' + term +  '" target="_blank">'
+        +      '<span><b>—</b></span>&nbsp;&nbsp;' + data[i].author + '</a>'
+        +    '</p>'
+        +  '</div>'
+        innerHtml = innerHtml + html
+      }
+      callback(innerHtml)
+    }
+
+    function getSearchTerm(author) {
+      var term = ''
+      for (var j = 0; j < author.length; j++) {
+        term = term + author[j] + '+'
+      }
+      var term = "https://www.google.com/search?q=" + term
+      return term.slice(0, -1) // remove trailing +
+    }
+
+    // Event Listeners
+    // textInput.addEventListener('click', showTextInput, false)
+    // send.addEventListener('click', function() {
+    //  sendNumber(phoneInput.value)
+    //}, false)
+    //phoneInput.addEventListener('keyup', validateInput, false)
+    usedQuotes.addEventListener('click', function(e) {
+      loadMoreQuotes('./usedQuotes.json', function(response) {
+        renderQuotes(response, function(html) {
+          quoteListing.insertAdjacentHTML('beforeend', html)
+          usedQuotes.style.display = "none"
+          quoteListing.style.display = "block"
+          quoteListing.scrollIntoView()
+        })
+      })
+    }, false)
+
+    random.addEventListener('click', function() {
+      loadRandomQuote('./random.json', function(random) {
+        if (!random[0]) { return }
+        random = random[0]
+        quote.textContent = random.text
+        authorLink.href = getSearchTerm(random.author.split(' '))
+        while (authorLink.hasChildNodes()) {
+          authorLink.removeChild(authorLink.firstChild);
+        }
+        authorLink.insertAdjacentHTML('afterbegin', '<span><b>—</b></span>&nbsp;&nbsp;' + random.author)
+        window.scrollTo(0,0)
+      })
+    }, false)
+
+    </script>
+
   </body>
 </html>
