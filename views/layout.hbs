@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="utf-8">
+  <title>{{title}}</title>
+  <meta name="description" content="Daily running inspiration.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=no">
+  <script type="text/javascript">{{nreum}}</script>
+  <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Gentium+Basic:400' rel='stylesheet' type='text/css'>
+
+  <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-2852247035983534",
+      enable_page_level_ads: true
+    });
+  </script>
+  
+  <style type="text/css" media="screen">
+    
+    /* Inlining styles because the content is above the fold. */
+
+    body, h1, h2, footer {
+      font-family: 'Lato', "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+      font-size: 1rem;
+      text-align: center;
+      color: black;
+      margin: 0;
+      font-weight: 400;
+    }
+
+    ul { padding: 0; }
+
+    span { color: #00CBFF; }
+
+    footer {
+      position: fixed;
+      bottom: 0;
+      color: #888;
+      padding: 1.25rem 0;
+      width: 100%;
+      background: white;
+      font-size: 1.1rem;
+    }
+
+    #top-bar {
+      position: fixed;
+      top: 0;
+      height: 5px;
+      background: #00CBFF;
+      width: 100%;
+      margin: 0;
+    }
+
+    #container-quote,
+    #quote {
+      max-width: 1400px;
+    }
+    
+    #container-quote {
+      margin: 2rem auto;
+      padding: 0.75rem;
+    }
+
+    #quote {
+      font-size: 2.75rem;
+      font-weight: 700;
+    }
+
+    #author {
+      font-family: 'Gentium Basic', Georgia, Times, "Times New Roman", serif;
+      color: #888;
+      font-size: 1.5rem;
+      font-weight: 300;
+      margin-top: 3rem;
+    }
+
+    #media-block {
+      margin-top: 1rem;
+      padding: 1rem;
+    }
+
+    #media-block ul li {
+      display: block;
+    }
+
+    #signup-text {
+      display: none;
+      margin-bottom: 5rem;
+    }
+
+    #show-text-input {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    #form-text,
+    #form-success,
+    #form-fail {
+      font-weight: 700;
+      margin: 1rem;
+    }
+
+    #form-success {
+      color: rgb(28, 184, 65);
+      display: none;
+      font-size: 2rem;
+    }
+
+    #form-fail {
+      color: #888;
+    }
+
+    #input-phone {
+      margin: 1rem auto;
+      width: 95%;
+    }
+
+    #label-phone {
+      visibility: hidden;
+    }
+
+    #send {
+      font-size: 120%;
+      display: block;
+      margin: 0 auto;
+      width: 95%;
+    }
+
+    #buttons button {
+      display: inline-block;
+    }
+
+    #buttons {
+      text-align: center;
+      margin-bottom: 10rem
+    }
+
+    #used-quotes {
+      margin-left: 1rem;
+    }
+
+    #quote-listing {
+      display: none;
+      margin-bottom: 10rem;
+      max-width: 750px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+
+    .quote-listing-container {
+      margin-bottom: 10rem;
+    }
+
+    .quote-text {
+      font-size: 2rem;
+      font-weight: 700;
+    }
+
+    .quote-author {
+      font-family: 'Gentium Basic', Georgia, Times, "Times New Roman", serif;
+      color: #888;
+      font-size: 1.5rem;
+      font-weight: 300;
+    }
+
+    input {
+      padding: 0.4em 0.5em;
+      display: inline-block;
+      border: 1px solid #ccc;
+      box-shadow: inset 0 1px 3px #ddd;
+      border-radius: 4px;
+      vertical-align: middle;
+      box-sizing: border-box;
+      line-height: 1.5rem;
+      font-size: 1.25rem;
+    }
+
+    input:focus {
+      outline: 0;
+      border-color: #00CBFF;
+    }
+
+    input:focus:invalid {
+      color: #b94a48;
+      border-color: #e9322d;
+    }
+
+    button {
+      /* Structure */
+      display: inline-block;
+      zoom: 1;
+      line-height: normal;
+      white-space: nowrap;
+      vertical-align: middle;
+      text-align: center;
+      cursor: pointer;
+      -webkit-user-drag: none;
+      user-select: none;
+      box-sizing: border-box;
+
+      font-family: inherit;
+      font-size: 100%;
+      padding: 0.5em 1em;
+      color: #444; /* rgba not supported (IE 8) */
+      color: rgba(0, 0, 0, 0.80); /* rgba supported */
+      border: 1px solid #999;  /*IE 6/7/8*/
+      border: none rgba(0, 0, 0, 0);  /*IE9 + everything else*/
+      background-color: #E6E6E6;
+      text-decoration: none;
+      border-radius: 2px;
+    }
+
+    button:hover,
+    button:focus {
+      filter: alpha(opacity=90);
+      background-image: linear-gradient(transparent, rgba(0,0,0, 0.05) 40%, rgba(0,0,0, 0.10));
+    }
+
+    button:focus {
+      outline: 0;
+    }
+
+    button:active {
+      box-shadow: 0 0 0 1px rgba(0,0,0, 0.15) inset, 0 0 6px rgba(0,0,0, 0.20) inset;
+      border-color: #000\9;
+    }
+
+    .button-primary,
+    .button-selected,
+    a.button-primary,
+    a.button-selected {
+      background-color: #00CBFF; /*rgb(0, 120, 231);*/
+      color: #fff;
+    }
+
+    a, a:visited {
+      text-decoration: none;
+      color: inherit;
+      -webkit-transition: color 500ms ease;
+         -moz-transition: color 500ms ease;
+           -o-transition: color 500ms ease;
+              transition: color 500ms ease;
+    }
+
+    a:hover {
+      color: #00CBFF;
+    }
+
+    @media (hover:none), (hover:on-demand) {
+      /* suppress hover effect on devices that don't support hover fully */
+      a:hover{
+        color: #00CBFF;
+      }
+    }
+
+    /* Small Devices, Tablets */
+    @media only screen and (min-width: 768px) { 
+      #media-block {
+        margin-top: 3rem;
+      }
+      #media-block ul li {
+        display: inline-block;
+      }
+      #send {
+        font-size: 120%;
+        display: inline-block;
+        margin: initial;
+        width: initial;
+      }
+      #input-phone {
+        width: initial;
+      }
+      #quote {
+        font-size: 4rem;
+      }
+      #author {
+        font-size: 2.5rem;
+      }
+    }
+
+    /* Large Devices, Wide Screens */
+    @media only screen and (min-width: 1200px) { 
+      #container-quote,
+      #quote {
+        margin: 0 auto;
+      }
+      #container-quote {
+        margin-top: 5rem;
+      }
+    }
+
+  </style>
+</head>
+  <body>
+    {{{body}}}
+
+    <script type="text/javascript">
+
+    var signupText   = document.getElementById('signup-text')
+    var textInput    = document.getElementById('show-text-input')
+    var phoneInput   = document.getElementById('input-phone')
+    var send         = document.getElementById('send')
+    var formSuccess  = document.getElementById('form-success')
+    var formFail     = document.getElementById('form-fail')
+    var usedQuotes   = document.getElementById('used-quotes')
+    var quoteListing = document.getElementById('quote-listing')
+    var random       = document.getElementById('random')
+    var quote        = document.getElementById('quote')
+    var author       = document.getElementById('author')
+    var authorLink   = document.getElementById('author-link')
+    var validNumber  = false
+
+    // show phone input form
+    function showTextInput() {
+      signupText.style.display = "block"
+      phoneInput.focus()
+    }
+
+    // handle sending number
+    // function sendNumber(number) {
+    //   if (!validNumber) return // fail
+    //   else { // success
+    //     saveNumber('/phone-signup', number, function(response) {
+    //       console.log(response)
+    //       formSuccess.style.display = "block"
+    //       signupText.style.display = "none"
+    //       textInput.style.display = "none"
+    //       setTimeout(function() { // hide form
+    //         formSuccess.style.display = "none"
+    //       }, 5000)
+    //     })
+    //   }
+    // }
+
+    // TODO: add length check. allow/check hyphens
+    // Validate phone number
+    // function validateInput(e) {
+    //   phoneNumber = phoneInput.value
+    //   var invalidCharacters = phoneNumber.match(/\D/g) // matches non-numbers
+    //   if(invalidCharacters || phoneNumber.length !== 10) { // failure
+    //     validNumber = false
+    //     formFail.style.color = "#e9322d"
+    //     phoneInput.style.borderColor = "#e9322d"
+    //   } else { // success
+    //     validNumber = true
+    //     formFail.style.color = "#888"
+    //     phoneInput.style.borderColor = "#00CBFF"
+    //     if (e.keyCode === 13) { // enter key
+    //       sendNumber(phoneNumber)
+    //     }
+    //   }
+    // }
+
+    // function saveNumber(url, number, callback) {
+    //   var xmlHttp = new XMLHttpRequest()
+    //   xmlHttp.onreadystatechange = function() { 
+    //     if (xmlHttp.readyState == 4 && xmlHttp.status < 300) {
+    //       callback(xmlHttp.responseText)
+    //     }
+    //   }
+    //   xmlHttp.open("GET", url + '?phone=' + number, true); // true for asynchronous 
+    //   xmlHttp.send(null)
+    // }
+
+
+    function loadMoreQuotes(url, callback) {
+      var xmlHttp = new XMLHttpRequest()
+      xmlHttp.onreadystatechange = function() { 
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+          var data = JSON.parse(xmlHttp.response)
+          callback(data)
+        }
+      }
+      xmlHttp.open("GET", url, true); // true for asynchronous 
+      xmlHttp.send(null)
+    }
+
+    function loadRandomQuote(url, callback) {
+      var xmlHttp = new XMLHttpRequest()
+      xmlHttp.onreadystatechange = function() { 
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+          var data = JSON.parse(xmlHttp.response)
+          callback(data)
+        }
+      }
+      xmlHttp.open("GET", url, true); // true for asynchronous 
+      xmlHttp.send(null)
+    }
+
+    function renderQuotes(data, callback) {
+      var innerHtml = ''
+      for (var i = data.length - 1; i >= 0; i--) {
+        var author = data[i].author.split(' ')
+        var term = getSearchTerm(author)
+        var html = ''
+        html += '<div class="quote-listing-container">'
+        +    '<p class="quote-text">'
+        +      data[i].text
+        +    '</p>'
+        +    '<p class="quote-author">'
+        +      '<a href="https://www.google.com/search?q=' + term +  '" target="_blank">'
+        +      '<span><b>—</b></span>&nbsp;&nbsp;' + data[i].author + '</a>'
+        +    '</p>'
+        +  '</div>'
+        innerHtml = innerHtml + html
+      }
+      callback(innerHtml)
+    }
+
+    function getSearchTerm(author) {
+      var term = ''
+      for (var j = 0; j < author.length; j++) {
+        term = term + author[j] + '+'
+      }
+      var term = "https://www.google.com/search?q=" + term
+      return term.slice(0, -1) // remove trailing +
+    }
+
+    // Event Listeners
+    // textInput.addEventListener('click', showTextInput, false)
+    // send.addEventListener('click', function() {
+    //  sendNumber(phoneInput.value)
+    //}, false)
+    //phoneInput.addEventListener('keyup', validateInput, false)
+    usedQuotes.addEventListener('click', function(e) {
+      loadMoreQuotes('./usedQuotes.json', function(response) {
+        renderQuotes(response, function(html) {
+          quoteListing.insertAdjacentHTML('beforeend', html)
+          usedQuotes.style.display = "none"
+          quoteListing.style.display = "block"
+          quoteListing.scrollIntoView()
+        })
+      })
+    }, false)
+
+    random.addEventListener('click', function() {
+      loadRandomQuote('./random.json', function(random) {
+        if (!random[0]) { return }
+        random = random[0]
+        quote.textContent = random.text
+        authorLink.href = getSearchTerm(random.author.split(' '))
+        while (authorLink.hasChildNodes()) {
+          authorLink.removeChild(authorLink.firstChild);
+        }
+        authorLink.insertAdjacentHTML('afterbegin', '<span><b>—</b></span>&nbsp;&nbsp;' + random.author)
+        window.scrollTo(0,0)
+      })
+    }, false)
+
+    </script>
+
+  </body>
+</html>
